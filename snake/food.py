@@ -12,4 +12,3 @@ class Food:
         self.pos_x=random.randint(0,COLS-1)
         self.pos_y=random.randint(0,ROWS-1)
         self.pos=Vector2(self.pos_x,self.pos_y)
-        print(self.pos, 'COMIDAAAAAAAAAAAAAAAAA')
