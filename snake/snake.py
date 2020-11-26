@@ -14,4 +14,7 @@ class Snake:
         body_c = self.body[:-1]
         body_c.insert(0, body_c[0]+self.direction)
         self.body = body_c[:]
-        
+    def enlarge(self):
+        body_c = self.body[:]
+        body_c.insert(0, body_c[0]+self.direction)
+        self.body = body_c[:]
