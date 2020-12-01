@@ -24,8 +24,14 @@ class Snake:
         body_c.insert(0, body_c[0]+self.direction)
         self.body = body_c[:]
     def update_head(self):
+        if self.direction == UP: self.head = HEAD_UP
+        elif self.direction == RIGHT: self.head = HEAD_RIGHT
+        elif self.direction == DOWN: self.head = HEAD_DOWN
+        elif self.direction == LEFT: self.head = HEAD_LEFT
+        """
         head_relation_vector = self.body[1] - self.body[0]
         if head_relation_vector == Vector2(1,0): self.head = HEAD_LEFT
         elif head_relation_vector == Vector2(-1,0): self.head = HEAD_RIGHT
         elif head_relation_vector == Vector2(0,1): self.head = HEAD_UP
         elif head_relation_vector == Vector2(0,-1): self.head = HEAD_DOWN
+        """"
