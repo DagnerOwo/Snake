@@ -34,4 +34,4 @@ class Snake:
         elif head_relation_vector == Vector2(-1,0): self.head = HEAD_RIGHT
         elif head_relation_vector == Vector2(0,1): self.head = HEAD_UP
         elif head_relation_vector == Vector2(0,-1): self.head = HEAD_DOWN
-        """"
+        """
