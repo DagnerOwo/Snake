@@ -8,7 +8,7 @@ clock=pygame.time.Clock()
 pygame.display.set_caption('Snake')
 def main():
     game = Game(screen)
-    clock.tick(60)
+    clock.tick(140)
     run=True
     game.draw_everything()
     SCREEN_UPDATE=pygame.USEREVENT

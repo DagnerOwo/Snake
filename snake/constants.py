@@ -1,4 +1,5 @@
 from pygame.math import Vector2
+import pygame
 WIDTH=600
 HEIGHT=600
 BLACK=(0,0,0)
@@ -13,3 +14,7 @@ RIGHT=Vector2(1,0)
 LEFT=Vector2(-1,0)
 UP=Vector2(0,-1)
 DOWN=Vector2(0,1)
+HEAD_UP = pygame.transform.scale(pygame.image.load('assets/head_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+HEAD_DOWN = pygame.transform.scale(pygame.image.load('assets/head_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+HEAD_RIGHT = pygame.transform.scale(pygame.image.load('assets/head_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+HEAD_LEFT = pygame.transform.scale(pygame.image.load('assets/head_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
