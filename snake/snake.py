@@ -1,5 +1,5 @@
 import pygame
-from .constants import SQUARE_SIZE,BLACK, HEAD_RIGHT, HEAD_LEFT, HEAD_UP, HEAD_DOWN
+from .constants import SQUARE_SIZE,BLACK, HEAD_RIGHT, HEAD_LEFT, HEAD_UP, HEAD_DOWN, UP, DOWN, RIGHT, LEFT
 from pygame.math import Vector2
 class Snake:
     def __init__(self):
