@@ -20,9 +20,7 @@ class Snake:
         body_c.insert(0, body_c[0]+self.direction)
         self.body = body_c[:]
     def enlarge(self):
-        body_c = self.body[:]
-        body_c.insert(0, body_c[0]+self.direction)
-        self.body = body_c[:]
+        self.body.append(self.body[-1]+self.direction)
     def update_head(self):
         if self.direction == UP: self.head = HEAD_UP
         elif self.direction == RIGHT: self.head = HEAD_RIGHT

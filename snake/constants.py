@@ -18,3 +18,4 @@ HEAD_UP = pygame.transform.scale(pygame.image.load('assets/head_up.png'), (SQUAR
 HEAD_DOWN = pygame.transform.scale(pygame.image.load('assets/head_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
 HEAD_RIGHT = pygame.transform.scale(pygame.image.load('assets/head_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
 HEAD_LEFT = pygame.transform.scale(pygame.image.load('assets/head_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+APPLE = pygame.transform.scale(pygame.image.load('assets/apple.png'), (SQUARE_SIZE, SQUARE_SIZE))
