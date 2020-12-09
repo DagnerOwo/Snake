@@ -3,8 +3,8 @@ from .constants import SQUARE_SIZE,BLACK, HEAD_RIGHT, HEAD_LEFT, HEAD_UP, HEAD_D
 from pygame.math import Vector2
 class Snake:
     def __init__(self):
-        self.body = [Vector2(3,4),Vector2(4,4),Vector2(5,4)]
-        self.direction = Vector2(1,0)
+        self.body = [Vector2(20,20),Vector2(20,21),Vector2(20,22)]
+        self.direction = UP
         #NUEVOS CAMBIOS
     def draw_snake(self, screen):
         self.update_head()
