@@ -42,9 +42,9 @@ class Game:
     #enlarge snake, and score
     def eat_food(self):
         if self.snake.body[0] == self.food.pos:
+            self.snake.enlarge()
             self.food.generate_food()
             self.score += 1
-            self.snake.enlarge()
             print(self.score, 'SCORE')
     #Collitions to his body and walls
     def check_collitions(self):
