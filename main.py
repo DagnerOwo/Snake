@@ -18,7 +18,9 @@ def main():
             if event.type == pygame.QUIT:
                 run=False
             if event.type == SCREEN_UPDATE:
+                game.moved_done = True
                 game._move()
+                
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     game.change_snake_direction(UP)

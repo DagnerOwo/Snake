@@ -7,6 +7,7 @@ class Game:
     def __init__(self, screen):
         self.screen = screen
         self.score = 0
+        self.moved_done = False
         self.snake = Snake()
         self.food = Food()
     def draw_everything(self):
@@ -25,20 +26,22 @@ class Game:
         pygame.display.update()
     def change_snake_direction(self, direction):
         #Can not move opposite direction
-        if direction == UP and self.snake.direction == DOWN:
-            direction = DOWN
-            self.snake.direction = direction
-        elif direction == DOWN and self.snake.direction == UP:
-            direction = UP
-            self.snake.direction = direction
-        elif direction == RIGHT and self.snake.direction == LEFT:
-            direction = LEFT
-            self.snake.direction = direction
-        elif direction == LEFT and self.snake.direction == RIGHT:
-            direction = RIGHT
-            self.snake.direction = direction
-        else:
-            self.snake.direction = direction
+        if self.moved_done == True:
+            if direction == UP and self.snake.direction == DOWN:
+                direction = DOWN
+                self.snake.direction = direction
+            elif direction == DOWN and self.snake.direction == UP:
+                direction = UP
+                self.snake.direction = direction
+            elif direction == RIGHT and self.snake.direction == LEFT:
+                direction = LEFT
+                self.snake.direction = direction
+            elif direction == LEFT and self.snake.direction == RIGHT:
+                direction = RIGHT
+                self.snake.direction = direction
+            else:
+                self.snake.direction = direction
+        self.moved_done = False
     #enlarge snake, and score
     def eat_food(self):
         if self.snake.body[0] == self.food.pos:
@@ -48,10 +51,10 @@ class Game:
             print(self.score, 'SCORE')
     #Collitions to his body and walls
     def check_collitions(self):
-        if self.snake.body[0].x<0 or self.snake.body[0].x>COLS:
+        if self.snake.body[0].x<0 or self.snake.body[0].x>=COLS:
             self.score = 0
             self.snake=Snake()
-        if self.snake.body[0].y<0 or self.snake.body[0].y>ROWS:
+        if self.snake.body[0].y<0 or self.snake.body[0].y>=ROWS:
             self.snake=Snake()
             self.score = 0
         # Body collition
