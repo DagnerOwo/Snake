@@ -14,8 +14,13 @@ class Game:
         self.snake.draw_snake(self.screen)
         self.food.draw_food(self.screen)
     def _move(self):
-        self.snake.move_snake()
-        self.eat_food()
+        if self.check_food_collition() == False:
+            self.snake.move_snake()
+        else: 
+            self.snake.enlarge()
+            self.food.generate_food()
+            self.score += 1
+            print(self.score, 'SCORE')
         self.check_collitions()
         print(self.snake.body[0])
     def update(self):
@@ -42,13 +47,10 @@ class Game:
             else:
                 self.snake.direction = direction
         self.moved_done = False
-    #enlarge snake, and score
-    def eat_food(self):
+    def check_food_collition(self):
         if self.snake.body[0] == self.food.pos:
-            self.snake.enlarge()
-            self.food.generate_food()
-            self.score += 1
-            print(self.score, 'SCORE')
+            return True
+        else: return False
     #Collitions to his body and walls
     def check_collitions(self):
         if self.snake.body[0].x<0 or self.snake.body[0].x>=COLS:

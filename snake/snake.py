@@ -43,10 +43,10 @@ class Snake:
         self.body = body_c[:]
 
     def enlarge(self):
-        self.body.append(self.body[-1]+self.direction)
-        #body_copy = self.body[:]
-        #body_copy.insert(0, body_copy[0] + self.direction)
-        #self.body = body_copy[:]
+        #self.body.append(self.body[-1]+self.direction)
+        body_copy = self.body[:]
+        body_copy.insert(0, body_copy[0] + self.direction)
+        self.body = body_copy[:]
 
     def update_head(self):
         """

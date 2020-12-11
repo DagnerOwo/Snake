@@ -28,5 +28,5 @@ BODY_HORIZONTAL = pygame.transform.scale(pygame.image.load('assets/body_horizont
 BODY_TL = pygame.transform.scale(pygame.image.load('assets/body_tl.png'), (SQUARE_SIZE, SQUARE_SIZE))
 BODY_TR = pygame.transform.scale(pygame.image.load('assets/body_tr.png'), (SQUARE_SIZE, SQUARE_SIZE))
 BODY_VERTICAL = pygame.transform.scale(pygame.image.load('assets/body_vertical.png'), (SQUARE_SIZE, SQUARE_SIZE))
-APPLE = pygame.transform.scale(pygame.image.load('assets/apple.png'), (SQUARE_SIZE, SQUARE_SIZE))
+APPLE = pygame.transform.scale(pygame.image.load('assets/apple.png'), (int(SQUARE_SIZE// 1.5), int(SQUARE_SIZE//1.5)))
 MENU_BACKGROUND = pygame.transform.scale(pygame.image.load('assets/snake_background_menu.jpg'), (WIDTH, HEIGHT))
