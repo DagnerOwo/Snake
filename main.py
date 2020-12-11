@@ -2,6 +2,7 @@ import pygame, sys
 from snake.constants import WIDTH,HEIGHT,GREEN, VELOCITY, RUSH, UP, DOWN, LEFT, RIGHT, BLACK, LIGHT_BLUE, MENU_BACKGROUND
 from snake.game import Game
 from pygame.math import Vector2
+from snake.tools import create_button
 pygame.init()
 screen=pygame.display.set_mode((WIDTH, HEIGHT))
 clock=pygame.time.Clock()
@@ -11,19 +12,18 @@ clock.tick(140)
 game = Game(screen)
 def menu():
     while True:
-        game_font = pygame.font.Font('assets/NerkoOne-Regular.ttf', 25) 
-        playbtn_text = str('Jugar')
-        playbtn_surface = game_font.render(playbtn_text,True,(56,74,12))
-        playbtn_rect = playbtn_surface.get_rect(center = (WIDTH/2,HEIGHT/2 - 100))
         screen.blit(MENU_BACKGROUND, (0,0))
-        play_button = pygame.Rect(WIDTH/2-100,HEIGHT/2 - 125, 200, 50)
+        play_button, playbtn_surface, playbtn_rect = create_button('Jugar', (56,74,12), (WIDTH/2-100, HEIGHT/2 - 125), 200, 50)
+        options_button, options_surface, options_rect = create_button('Opciones', (56,74,12), (WIDTH/2-100, HEIGHT/2 - 25), 200, 50)
+
         mouse_x, mouse_y = pygame.mouse.get_pos()
         if play_button.collidepoint((mouse_x, mouse_y)):
             if clicked:
                 game_scene()
         pygame.draw.rect(screen, LIGHT_BLUE, play_button)
-        
+        pygame.draw.rect(screen, LIGHT_BLUE, options_button)
         screen.blit(playbtn_surface, playbtn_rect)
+        screen.blit(options_surface, options_rect)
         clicked = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
