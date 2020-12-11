@@ -1,12 +1,11 @@
 import pygame,random
-from .constants import COLS,ROWS,SQUARE_SIZE,RED, APPLE
+from .constants import COLS,ROWS,SQUARE_SIZE, APPLE
 from pygame.math import Vector2
 class Food:
     def __init__(self):
         self.generate_food()
     def draw_food(self,screen):
         food_rect=pygame.Rect(self.pos.x*SQUARE_SIZE,self.pos.y*SQUARE_SIZE,SQUARE_SIZE,SQUARE_SIZE)
-        #pygame.draw.rect(screen,RED,food_rect)
         screen.blit(APPLE, food_rect)
     #generate food in a random position
     def generate_food(self):
