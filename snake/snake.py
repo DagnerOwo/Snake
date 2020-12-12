@@ -7,6 +7,7 @@ class Snake:
     def __init__(self):
         self.body = [Vector2(20, 20), Vector2(20, 21), Vector2(20, 22)]
         self.direction = UP
+        self.crunch_sound = pygame.mixer.Sound("assets/sounds/crunch.wav")
         # NUEVOS CAMBIOS
 
     def draw_snake(self, screen):
@@ -47,6 +48,8 @@ class Snake:
         body_copy = self.body[:]
         body_copy.insert(0, body_copy[0] + self.direction)
         self.body = body_copy[:]
+        #play Sound
+    def play_crunch_sound(self): self.crunch_sound.play()
 
     def update_head(self):
         """

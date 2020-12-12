@@ -3,6 +3,7 @@ from snake.constants import WIDTH,HEIGHT,GREEN, VELOCITY, RUSH, UP, DOWN, LEFT, 
 from snake.game import Game
 from pygame.math import Vector2
 from snake.tools import create_button
+pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 screen=pygame.display.set_mode((WIDTH, HEIGHT))
 clock=pygame.time.Clock()
@@ -17,13 +18,16 @@ def menu():
         options_button, options_surface, options_rect = create_button('Opciones', (56,74,12), (WIDTH/2-100, HEIGHT/2 - 25), 200, 50)
 
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        if play_button.collidepoint((mouse_x, mouse_y)):
-            if clicked:
-                game_scene()
         pygame.draw.rect(screen, LIGHT_BLUE, play_button)
         pygame.draw.rect(screen, LIGHT_BLUE, options_button)
         screen.blit(playbtn_surface, playbtn_rect)
         screen.blit(options_surface, options_rect)
+        if play_button.collidepoint((mouse_x, mouse_y)):
+            if clicked:
+                game_scene()
+        elif options_button.collidepoint((mouse_x, mouse_y)):
+            if clicked:
+                print("Options clicked")
         clicked = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

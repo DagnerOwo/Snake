@@ -19,6 +19,7 @@ class Game:
         else: 
             self.snake.enlarge()
             self.food.generate_food()
+            self.snake.play_crunch_sound()
             self.score += 1
             print(self.score, 'SCORE')
         self.check_collitions()
