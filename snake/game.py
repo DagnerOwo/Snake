@@ -1,6 +1,6 @@
 from .snake import Snake
 import pygame
-from .constants import LEFT, RIGHT, DOWN, UP, SQUARE_SIZE, ROWS, COLS
+from .constants import LEFT, RIGHT, DOWN, UP, SQUARE_SIZE, ROWS, COLS, SNAKE_COLOR
 from .food import Food
 from pygame.math import Vector2
 class Game:
@@ -21,9 +21,7 @@ class Game:
             self.food.generate_food()
             self.snake.play_crunch_sound()
             self.score += 1
-            print(self.score, 'SCORE')
         self.check_collitions()
-        print(self.snake.body[0])
     def update(self):
         self.food.draw_food(self.screen)
         self.snake.draw_snake(self.screen)

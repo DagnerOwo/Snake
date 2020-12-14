@@ -1,13 +1,14 @@
 import pygame
-from .constants import SQUARE_SIZE, BLACK, HEAD_RIGHT, HEAD_LEFT, HEAD_UP, HEAD_DOWN, UP, DOWN, RIGHT, LEFT, TAIL_DOWN, TAIL_LEFT, TAIL_UP, TAIL_RIGHT, BODY_BL, BODY_BR, BODY_HORIZONTAL, BODY_TL, BODY_TR, BODY_VERTICAL
+from .constants import SQUARE_SIZE, BLACK, UP
 from pygame.math import Vector2
-
+from .tools import read_color
 
 class Snake:
     def __init__(self):
         self.body = [Vector2(20, 20), Vector2(20, 21), Vector2(20, 22)]
         self.direction = UP
         self.crunch_sound = pygame.mixer.Sound("assets/sounds/crunch.wav")
+        self.definir_color()
         # NUEVOS CAMBIOS
 
     def draw_snake(self, screen):
@@ -24,18 +25,18 @@ class Snake:
                 previous_block = self.body[index + 1]-block
                 next_block = self.body[index - 1]-block
                 if previous_block.x == next_block.x:
-                    screen.blit(BODY_VERTICAL, block_rect)
+                    screen.blit(self.BODY_VERTICAL, block_rect)
                 elif previous_block.y == next_block.y:
-                    screen.blit(BODY_HORIZONTAL, block_rect)
+                    screen.blit(self.BODY_HORIZONTAL, block_rect)
                 else:
                     if previous_block.x == -1 and next_block.y == -1 or previous_block.y == -1 and next_block.x == -1:
-                        screen.blit(BODY_TL, block_rect)
+                        screen.blit(self.BODY_TL, block_rect)
                     elif previous_block.x == -1 and next_block.y == 1 or previous_block.y == 1 and next_block.x == -1:
-                        screen.blit(BODY_BL, block_rect)
+                        screen.blit(self.BODY_BL, block_rect)
                     elif previous_block.x == 1 and next_block.y == -1 or previous_block.y == -1 and next_block.x == 1:
-                        screen.blit(BODY_TR, block_rect)
+                        screen.blit(self.BODY_TR, block_rect)
                     elif previous_block.x == 1 and next_block.y == 1 or previous_block.y == 1 and next_block.x == 1:
-                        screen.blit(BODY_BR, block_rect)
+                        screen.blit(self.BODY_BR, block_rect)
 
     def move_snake(self):
         # Copiamos el cuerpo entero menos la última posicion
@@ -64,21 +65,73 @@ class Snake:
         """
         head_relation_vector = self.body[1] - self.body[0]
         if head_relation_vector == Vector2(1, 0):
-            self.head = HEAD_LEFT
+            self.head = self.HEAD_LEFT
         elif head_relation_vector == Vector2(-1, 0):
-            self.head = HEAD_RIGHT
+            self.head = self.HEAD_RIGHT
         elif head_relation_vector == Vector2(0, 1):
-            self.head = HEAD_UP
+            self.head = self.HEAD_UP
         elif head_relation_vector == Vector2(0, -1):
-            self.head = HEAD_DOWN
+            self.head = self.HEAD_DOWN
 
     def update_tail(self):
         tail_relation_vector = self.body[-2] - self.body[-1]
         if tail_relation_vector == Vector2(1, 0):
-            self.tail = TAIL_LEFT
+            self.tail = self.TAIL_LEFT
         elif tail_relation_vector == Vector2(-1, 0):
-            self.tail = TAIL_RIGHT
+            self.tail = self.TAIL_RIGHT
         elif tail_relation_vector == Vector2(0, 1):
-            self.tail = TAIL_UP
+            self.tail = self.TAIL_UP
         elif tail_relation_vector == Vector2(0, -1):
-            self.tail = TAIL_DOWN
+            self.tail = self.TAIL_DOWN
+    def definir_color(self):
+        #Lee el archivo config y busca la opcion SNAKE_COLOR
+        SNAKE_COLOR = read_color()
+        
+        if SNAKE_COLOR == "PURPLE":
+            self.HEAD_UP = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_DOWN = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_RIGHT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_LEFT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_UP = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_DOWN = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_RIGHT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_LEFT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_BL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_bl.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_BR = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_br.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_HORIZONTAL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_horizontal.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_TL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_tl.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_TR = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_tr.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_VERTICAL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_vertical.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            print(SNAKE_COLOR)
+        elif SNAKE_COLOR == "PINK":
+            self.HEAD_UP = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_head_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_DOWN = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_head_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_RIGHT = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_head_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_LEFT = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_head_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_UP = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_tail_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_DOWN = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_tail_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_RIGHT = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_tail_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_LEFT = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_tail_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_BL = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_body_bl.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_BR = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_body_br.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_HORIZONTAL = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_body_horizontal.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_TL = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_body_tl.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_TR = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_body_tr.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_VERTICAL = pygame.transform.scale(pygame.image.load('assets/snake_images/pink/pink_body_vertical.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            print(SNAKE_COLOR)
+        else:
+            self.HEAD_UP = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_DOWN = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_RIGHT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.HEAD_LEFT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/head_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_UP = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_up.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_DOWN = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_down.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_RIGHT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_right.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.TAIL_LEFT = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/tail_left.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_BL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_bl.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_BR = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_br.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_HORIZONTAL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_horizontal.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_TL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_tl.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_TR = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_tr.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.BODY_VERTICAL = pygame.transform.scale(pygame.image.load('assets/snake_images/purple/body_vertical.png'), (SQUARE_SIZE, SQUARE_SIZE))
+        print(SNAKE_COLOR + "SOY SNAKE")
