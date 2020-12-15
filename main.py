@@ -2,7 +2,7 @@ import pygame, sys
 from snake.constants import WIDTH,HEIGHT,GREEN, VELOCITY, RUSH, UP, DOWN, LEFT, RIGHT, BLACK, LIGHT_BLUE, MENU_BACKGROUND,  SNAKE_COLOR
 from snake.game import Game
 from pygame.math import Vector2
-from snake.tools import create_button, change_color
+from snake.tools import create_button, change_color, read_color
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 screen=pygame.display.set_mode((WIDTH, HEIGHT))
@@ -41,9 +41,9 @@ def menu():
                     clicked = True
         pygame.display.update()
         
-game = Game(screen)
+
 def game_scene():
-    
+    game = Game(screen)
     run=True
     SCREEN_UPDATE=pygame.USEREVENT
     pygame.time.set_timer(SCREEN_UPDATE,VELOCITY)
@@ -79,12 +79,17 @@ def options():
     run=True
     while run:
         screen.blit(MENU_BACKGROUND, (0,0))
-        purplebtn, purplebtn_surface, purplebtn_rect = create_button('Morado', (56,74,12), (WIDTH/2-100, HEIGHT/2 - 125), 200, 50)
-        pinkbtn, pinkbtn_surface, pinkbtn_rect = create_button('Rosa', (56,74,12), (WIDTH/2-100, HEIGHT/2 - 25), 200, 50)
+        if read_color() == "PURPLE":
+            purplebtn, purplebtn_surface, purplebtn_rect = create_button('Morado --> Selected', (0,0,0), (WIDTH/2-100, HEIGHT/2 - 125), 200, 50)
+            pinkbtn, pinkbtn_surface, pinkbtn_rect = create_button('Rosa', (0,0,0), (WIDTH/2-100, HEIGHT/2 - 25), 200, 50)
+        else:
+            purplebtn, purplebtn_surface, purplebtn_rect = create_button('Morado', (0,0,0), (WIDTH/2-100, HEIGHT/2 - 125), 200, 50)
+            pinkbtn, pinkbtn_surface, pinkbtn_rect = create_button('Rosa --> Selected', (0,0,0), (WIDTH/2-100, HEIGHT/2 - 25), 200, 50)
+
 
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        pygame.draw.rect(screen, LIGHT_BLUE, purplebtn)
-        pygame.draw.rect(screen, LIGHT_BLUE, pinkbtn)
+        pygame.draw.rect(screen, (110, 37, 203), purplebtn)
+        pygame.draw.rect(screen, (249, 173, 217), pinkbtn)
         screen.blit(purplebtn_surface, purplebtn_rect)
         screen.blit(pinkbtn_surface, pinkbtn_rect)
         if purplebtn.collidepoint((mouse_x, mouse_y)):
